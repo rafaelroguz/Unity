@@ -21,4 +21,5 @@ public class ship_movement : MonoBehaviour {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
     }
+
 }

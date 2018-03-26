@@ -6,10 +6,16 @@ public class ControlJugador : MonoBehaviour {
 
     public float speed;
     private Rigidbody rb;
+    private int count;
+    public Text countText;
+    public Text winText;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        count = 0;
+        countText.text = "Score: " + count.ToString();
+        winText.text = "";
     }
 
     void Update()
@@ -20,10 +26,18 @@ public class ControlJugador : MonoBehaviour {
         rb.AddForce(movement * speed);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Pick Up"))
+        if (other.gameObject.CompareTag("Pick Up")) { 
             other.gameObject.SetActive(false);
+            count = count + 1;
+            countText.text = "Score: " + count.ToString();
+
+            if (count > 7)
+            {
+                winText.text = "You win!";
+            }
+        }
     }
 
 }
